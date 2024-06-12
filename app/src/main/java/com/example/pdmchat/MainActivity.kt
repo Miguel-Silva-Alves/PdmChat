@@ -1,9 +1,12 @@
 package com.example.pdmchat
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -48,6 +51,9 @@ class MainActivity : AppCompatActivity() {
 //        messageController.insertMessage(message)
 //        Log.e("FIREBASE", "After insert")
 
+        // ToolBar
+        setSupportActionBar(amb.toolbar)
+
         uiUpdaterHandler.apply {
             sendMessageDelayed(
                 android.os.Message.obtain().apply {
@@ -58,6 +64,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         amb.messageLv.adapter = messageAdapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
     }
 
     val uiUpdaterHandler: Handler = object : Handler(Looper.getMainLooper()) {
@@ -87,5 +98,23 @@ class MainActivity : AppCompatActivity() {
         messageList.addAll(messages)
         Log.e("MIGUEL Messages", messageList.toString())
         messageAdapter.notifyDataSetChanged()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.add_message -> {
+//                val intent = Intent(this, SendChatActivity::class.java)
+//                intent.putExtra("remetente", usernameInput.text.toString().trim())
+//                startActivity(intent)
+//                true
+                Log.e("Miguel", "adicionar uma mensagem")
+                true
+            }
+            R.id.exit_app -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

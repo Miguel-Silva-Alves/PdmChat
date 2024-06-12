@@ -21,6 +21,7 @@ class MessageDaoRtImpl: MessageDao {
 
     // Simula uma consulta no banco de dados
     private val messageList = mutableListOf<Message>()
+    private var isFirstValueEvent = true
     init {
         // Chamado sempre que houver uma modificação no banco de dados de tempo real do Firebase
         messageRtDbFbReference.addChildEventListener(
@@ -70,19 +71,18 @@ class MessageDaoRtImpl: MessageDao {
         messageRtDbFbReference.addListenerForSingleValueEvent(
             object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val messages = snapshot.getValue(object : GenericTypeIndicator<List<Message>>() {})
-                    if (messages != null) {
-                        for (message in messages) {
-                            println(message)
+                    if (isFirstValueEvent) {
+                        isFirstValueEvent = false
+                        val chats = snapshot.children.mapNotNull { it.getValue(Message::class.java) }
+                        if (chats.isNotEmpty()) {
+                            messageList.addAll(chats.filterNot { messageList.contains(it) })
+                            for (chat in chats) {
+                                println(chat)
+                            }
+                        } else {
+                            println("Nenhuma mensagem encontrada.")
                         }
-                    } else {
-                        println("Nenhuma mensagem encontrada.")
                     }
-//
-//                    if (messageMap != null) {
-//                        messageList.clear()
-//                        messageList.addAll(messageMap.values)
-//                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -93,6 +93,12 @@ class MessageDaoRtImpl: MessageDao {
     }
 
     override fun createMessage(message: Message): Int {
+
+        val messageRf = messageRtDbFbReference.push()
+        val id = messageRf.key ?: return -1
+        message.id = id
+        messageRf.setValue(message)
+        Log.d("Firebase", "Enviando message para o Firebase: $message")
         createOrUpdateMessage(message)
         return 1
     }

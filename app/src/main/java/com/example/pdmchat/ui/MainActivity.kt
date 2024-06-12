@@ -1,5 +1,6 @@
 package com.example.pdmchat.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -47,6 +48,12 @@ class MainActivity : AppCompatActivity() {
 //        Log.e("FIREBASE", "Before insert")
 //        messageController.insertMessage(message)
 //        Log.e("FIREBASE", "After insert")
+
+//        val sharedPreferences = getSharedPreferences("Sendler", Context.MODE_PRIVATE)
+//        val name = sharedPreferences.getString("Sendler", "")
+//        if (name != ""){
+//            sendMessageBinding.chatSendler.setText(name)
+//        }
 
         // ToolBar
         setSupportActionBar(amb.toolbar)

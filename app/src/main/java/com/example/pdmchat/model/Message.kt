@@ -2,13 +2,14 @@ package com.example.pdmchat.model
 
 import android.os.Parcelable
 import androidx.annotation.NonNull
+import androidx.room.PrimaryKey
 
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Message (
-
-    var id: Int? = -1,
+    @PrimaryKey(autoGenerate = true)
+    var id: String? = "",
     @NonNull
     var sender: String = "",
     @NonNull

@@ -1,6 +1,7 @@
 package com.example.pdmchat.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -73,7 +74,10 @@ class SendMessageActivity : AppCompatActivity() {
         messageController.insertMessage(message)
         Toast.makeText(this, "Mensagem enviada", Toast.LENGTH_SHORT).show()
 
-        finish()
+        Intent().apply {
+            setResult(RESULT_OK, this)
+            finish()
+        }
     }
 
 }

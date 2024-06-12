@@ -26,20 +26,22 @@ class MessageAdapter(context: Context, private val messageList: MutableList<Mess
             ).apply{
                 tag = TileContactHolder(
                     findViewById(R.id.nameTv),
-                    findViewById(R.id.messageTv)
+                    findViewById(R.id.messageTv),
+                    findViewById(R.id.dateTv)
                 )
             }
         }
 
-        // colocar os valores de contato na célula
+        // colocar os valores de mensagem na célula
         (messageTileView?.tag as TileContactHolder).apply{
             nameTv.text = message.sender
             emailTv.text = message.message
+            dateTv.text = message.date + " " + message.time
         }
 
         // retorna a célula preenchida
         return messageTileView
     }
 
-    private data class TileContactHolder(val nameTv: TextView, val emailTv: TextView)
+    private data class TileContactHolder(val nameTv: TextView, val emailTv: TextView, val dateTv: TextView)
 }

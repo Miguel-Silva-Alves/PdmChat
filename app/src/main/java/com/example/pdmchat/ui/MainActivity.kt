@@ -1,4 +1,4 @@
-package com.example.pdmchat
+package com.example.pdmchat.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,15 +7,12 @@ import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.pdmchat.R
 import com.example.pdmchat.adapter.MessageAdapter
 import com.example.pdmchat.controller.MessageRtController
 import com.example.pdmchat.databinding.ActivityMainBinding
 import com.example.pdmchat.model.Message
-import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -103,10 +100,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.add_message -> {
-//                val intent = Intent(this, SendChatActivity::class.java)
-//                intent.putExtra("remetente", usernameInput.text.toString().trim())
-//                startActivity(intent)
-//                true
+                val intent = Intent(this, SendMessageActivity::class.java)
+                intent.putExtra("remetente", "")
+                startActivity(intent)
+                true
                 Log.e("Miguel", "adicionar uma mensagem")
                 true
             }

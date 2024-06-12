@@ -2,7 +2,7 @@ package com.example.pdmchat.controller
 
 import android.os.Message as Msg
 import com.example.pdmchat.model.Message
-import com.example.pdmchat.MainActivity
+import com.example.pdmchat.ui.MainActivity
 import com.example.pdmchat.model.MessageDao
 import com.example.pdmchat.model.MessageDaoRtImpl
 import kotlinx.coroutines.GlobalScope

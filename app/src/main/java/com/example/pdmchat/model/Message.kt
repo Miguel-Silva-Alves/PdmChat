@@ -12,6 +12,8 @@ data class Message (
     @NonNull
     var sender: String = "",
     @NonNull
+    var recipient: String = "",
+    @NonNull
     var date: String = "",
     @NonNull
     var time: String = "",

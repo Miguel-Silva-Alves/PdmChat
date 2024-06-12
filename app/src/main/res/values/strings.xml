@@ -4,4 +4,7 @@
     <string name="message">Message</string>
     <string name="sair_do_aplicativo">Sair do Aplicativo</string>
     <string name="new_message">Nova Mensagem</string>
+    <string name="receiver">Digite o destinatário</string>
+    <string name="messageEdit">Digite a mensagem</string>
+    <string name="sendler">Digite seu @</string>
 </resources>
